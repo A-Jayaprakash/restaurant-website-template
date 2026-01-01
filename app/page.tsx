@@ -1,10 +1,12 @@
 import Hero from "@/src/components/sections/Hero";
+import Features from "@/src/components/sections/Features";
 
 export default function Home() {
   return (
     <main>
       <Hero />
-      {/* Other sections will go here */}
+      <Features />
+      {/* More sections coming... */}
     </main>
   );
 }
