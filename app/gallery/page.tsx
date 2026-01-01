@@ -4,82 +4,7 @@ import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { X, ZoomIn } from "lucide-react";
 import { cn } from "@/src/lib/utils";
-
-// Gallery images data
-const galleryImages = [
-  {
-    id: 1,
-    url: "https://images.unsplash.com/photo-1567188040759-fb8a883dc6d8?w=800",
-    category: "food",
-    alt: "Delicious Paneer Tikka",
-  },
-  {
-    id: 2,
-    url: "https://images.unsplash.com/photo-1603894584373-5ac82b2ae398?w=800",
-    category: "food",
-    alt: "Butter Chicken",
-  },
-  {
-    id: 3,
-    url: "https://images.unsplash.com/photo-1585937421612-70a008356fbe?w=800",
-    category: "ambience",
-    alt: "Restaurant Interior",
-  },
-  {
-    id: 4,
-    url: "https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?w=800",
-    category: "ambience",
-    alt: "Cozy Dining Area",
-  },
-  {
-    id: 5,
-    url: "https://images.unsplash.com/photo-1563379091339-03b21ab4a4f8?w=800",
-    category: "food",
-    alt: "Biryani Special",
-  },
-  {
-    id: 6,
-    url: "https://images.unsplash.com/photo-1555939594-58d7cb561ad1?w=800",
-    category: "food",
-    alt: "Gourmet Burger",
-  },
-  {
-    id: 7,
-    url: "https://images.unsplash.com/photo-1550966871-3ed3cdb5ed0c?w=800",
-    category: "ambience",
-    alt: "Outdoor Seating",
-  },
-  {
-    id: 8,
-    url: "https://images.unsplash.com/photo-1414235077428-338989a2e8c0?w=800",
-    category: "ambience",
-    alt: "Bar Area",
-  },
-  {
-    id: 9,
-    url: "https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?w=800",
-    category: "food",
-    alt: "Pizza Delight",
-  },
-  {
-    id: 10,
-    url: "https://images.unsplash.com/photo-1589119908995-c963f8f4d0a4?w=800",
-    category: "food",
-    alt: "Dessert Selection",
-  },
-  {
-    id: 11,
-    url: "https://images.unsplash.com/photo-1559339352-11d035aa65de?w=800",
-    category: "events",
-    alt: "Private Dining Event",
-  },
-  {
-    id: 12,
-    url: "https://images.unsplash.com/photo-1511795409834-ef04bbd61622?w=800",
-    category: "events",
-    alt: "Celebration Party",
-  },
-];
+import { restaurantData } from "@/src/config/restaurant-data";
 
 const categories = [
   { name: "All", value: "all" },
@@ -91,8 +16,10 @@ const categories = [
 export default function GalleryPage() {
   const [activeCategory, setActiveCategory] = useState("all");
   const [selectedImage, setSelectedImage] = useState<
-    (typeof galleryImages)[0] | null
+    (typeof restaurantData.gallery)[0] | null
   >(null);
+
+  const galleryImages = restaurantData.gallery;
 
   // Filter images based on active category
   const filteredImages =

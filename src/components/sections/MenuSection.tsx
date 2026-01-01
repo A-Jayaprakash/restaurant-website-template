@@ -4,125 +4,25 @@ import { useState } from "react";
 import { motion } from "framer-motion";
 import { Flame, Star } from "lucide-react";
 import { cn } from "@/src/lib/utils";
-
-// Sample menu data - we'll move this to config later
-const menuData = {
-  categories: [
-    "All",
-    "Starters",
-    "Main Course",
-    "Biryani",
-    "Desserts",
-    "Beverages",
-  ],
-  items: [
-    {
-      id: 1,
-      name: "Paneer Tikka",
-      description: "Grilled cottage cheese cubes marinated in aromatic spices",
-      price: 280,
-      category: "Starters",
-      isVeg: true,
-      isPopular: true,
-      isSpicy: true,
-      image:
-        "https://images.unsplash.com/photo-1567188040759-fb8a883dc6d8?w=400",
-    },
-    {
-      id: 2,
-      name: "Chicken 65",
-      description: "Crispy fried chicken tossed with curry leaves and spices",
-      price: 320,
-      category: "Starters",
-      isVeg: false,
-      isPopular: true,
-      isSpicy: true,
-      image:
-        "https://images.unsplash.com/photo-1610057099443-fde8c4d50f91?w=400",
-    },
-    {
-      id: 3,
-      name: "Butter Chicken",
-      description: "Tender chicken in rich tomato-butter gravy",
-      price: 450,
-      category: "Main Course",
-      isVeg: false,
-      isPopular: true,
-      isSpicy: false,
-      image:
-        "https://images.unsplash.com/photo-1603894584373-5ac82b2ae398?w=400",
-    },
-    {
-      id: 4,
-      name: "Palak Paneer",
-      description: "Cottage cheese cubes in creamy spinach gravy",
-      price: 350,
-      category: "Main Course",
-      isVeg: true,
-      isPopular: false,
-      isSpicy: false,
-      image:
-        "https://images.unsplash.com/photo-1601050690597-df0568f70950?w=400",
-    },
-    {
-      id: 5,
-      name: "Hyderabadi Biryani",
-      description: "Fragrant basmati rice layered with tender meat and spices",
-      price: 420,
-      category: "Biryani",
-      isVeg: false,
-      isPopular: true,
-      isSpicy: true,
-      image:
-        "https://images.unsplash.com/photo-1563379091339-03b21ab4a4f8?w=400",
-    },
-    {
-      id: 6,
-      name: "Veg Biryani",
-      description: "Aromatic rice with mixed vegetables and exotic spices",
-      price: 320,
-      category: "Biryani",
-      isVeg: true,
-      isPopular: false,
-      isSpicy: true,
-      image:
-        "https://images.unsplash.com/photo-1563379091339-03b21ab4a4f8?w=400",
-    },
-    {
-      id: 7,
-      name: "Gulab Jamun",
-      description: "Soft milk dumplings soaked in rose-flavored sugar syrup",
-      price: 120,
-      category: "Desserts",
-      isVeg: true,
-      isPopular: true,
-      isSpicy: false,
-      image:
-        "https://images.unsplash.com/photo-1589119908995-c963f8f4d0a4?w=400",
-    },
-    {
-      id: 8,
-      name: "Masala Chai",
-      description: "Traditional Indian tea brewed with aromatic spices",
-      price: 60,
-      category: "Beverages",
-      isVeg: true,
-      isPopular: true,
-      isSpicy: false,
-      image:
-        "https://images.unsplash.com/photo-1571934811356-5cc061b6821f?w=400",
-    },
-  ],
-};
+import { restaurantData } from "@/src/config/restaurant-data";
 
 export default function MenuSection() {
   const [activeCategory, setActiveCategory] = useState("All");
 
+  // Get all categories including "All"
+  const categories = ["All", ...restaurantData.menu.map((cat) => cat.name)];
+
+  // Get items for preview (first 8 items across all categories)
+  const allItems = restaurantData.menu.flatMap((category) => category.items);
+  const previewItems = allItems.slice(0, 8);
+
   // Filter menu items based on active category
   const filteredItems =
     activeCategory === "All"
-      ? menuData.items
-      : menuData.items.filter((item) => item.category === activeCategory);
+      ? previewItems
+      : restaurantData.menu
+          .find((cat) => cat.name === activeCategory)
+          ?.items.slice(0, 8) || [];
 
   return (
     <section className="py-20 bg-white">
@@ -151,7 +51,7 @@ export default function MenuSection() {
           transition={{ duration: 0.6, delay: 0.2 }}
           className="flex flex-wrap justify-center gap-3 mb-12"
         >
-          {menuData.categories.map((category) => (
+          {categories.map((category) => (
             <button
               key={category}
               onClick={() => setActiveCategory(category)}

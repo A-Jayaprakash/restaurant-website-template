@@ -3,8 +3,12 @@
 import { motion } from "framer-motion";
 import { Phone, UtensilsCrossed, MapPin } from "lucide-react";
 import { cn } from "@/src/lib/utils";
+import { restaurantData } from "@/src/config/restaurant-data";
 
 export default function Hero() {
+  const { info, contact, hours } = restaurantData;
+  const weekdayHours = hours.find((h) => h.day === "Monday");
+
   return (
     <section className="relative h-screen w-full overflow-hidden">
       {/* Background Image with Overlay */}
@@ -31,7 +35,7 @@ export default function Hero() {
             className="inline-block mb-6"
           >
             <span className="px-4 py-2 bg-orange-600/90 text-white rounded-full text-sm font-semibold">
-              ⭐ Rated 4.8 | 500+ Reviews
+              ⭐ Rated {info.rating} | {info.totalReviews}+ Reviews
             </span>
           </motion.div>
 
@@ -42,8 +46,10 @@ export default function Hero() {
             transition={{ duration: 0.6, delay: 0.2 }}
             className="text-5xl md:text-7xl font-bold text-white mb-6 leading-tight"
           >
-            Authentic Flavors,{" "}
-            <span className="text-orange-500">Unforgettable</span> Experience
+            {info.tagline.split(", ")[0]},{" "}
+            <span className="text-orange-500">
+              {info.tagline.split(", ")[1]}
+            </span>
           </motion.h1>
 
           {/* Subtitle */}
@@ -53,8 +59,7 @@ export default function Hero() {
             transition={{ duration: 0.6, delay: 0.4 }}
             className="text-xl md:text-2xl text-gray-200 mb-10 leading-relaxed"
           >
-            Discover culinary excellence where tradition meets innovation. Fresh
-            ingredients, bold flavors, and warm hospitality await you.
+            {info.description}
           </motion.p>
 
           {/* CTA Buttons */}
@@ -80,7 +85,7 @@ export default function Hero() {
 
             {/* Secondary CTA */}
             <a
-              href="tel:+919876543210"
+              href={`tel:${contact.phone}`}
               className={cn(
                 "flex items-center justify-center gap-3 px-8 py-4",
                 "bg-white/10 backdrop-blur-sm text-white rounded-lg font-semibold text-lg",
@@ -94,7 +99,9 @@ export default function Hero() {
 
             {/* Tertiary CTA */}
             <a
-              href="#location"
+              href={contact.address.googleMapsUrl}
+              target="_blank"
+              rel="noopener noreferrer"
               className={cn(
                 "flex items-center justify-center gap-3 px-8 py-4",
                 "bg-white/10 backdrop-blur-sm text-white rounded-lg font-semibold text-lg",
@@ -117,7 +124,7 @@ export default function Hero() {
             <div className="flex items-center gap-2">
               <span className="text-2xl">🕐</span>
               <span className="text-sm md:text-base">
-                Open Daily: 11 AM - 11 PM
+                Open Daily: {weekdayHours?.open} - {weekdayHours?.close}
               </span>
             </div>
             <div className="flex items-center gap-2">
@@ -128,7 +135,9 @@ export default function Hero() {
             </div>
             <div className="flex items-center gap-2">
               <span className="text-2xl">📍</span>
-              <span className="text-sm md:text-base">T. Nagar, Chennai</span>
+              <span className="text-sm md:text-base">
+                {contact.address.city}
+              </span>
             </div>
           </motion.div>
         </div>

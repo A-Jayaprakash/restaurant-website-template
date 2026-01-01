@@ -2,63 +2,14 @@
 
 import { motion } from "framer-motion";
 import { Award, Heart, Users, Leaf, Clock, Target } from "lucide-react";
-import { cn } from "@/src/lib/utils";
+import { aboutData } from "@/src/config/about-data";
 
-const values = [
-  {
-    icon: Heart,
-    title: "Passion for Food",
-    description:
-      "Every dish is crafted with love and dedication to culinary excellence",
-  },
-  {
-    icon: Leaf,
-    title: "Fresh Ingredients",
-    description:
-      "We source locally and use only the finest, freshest ingredients daily",
-  },
-  {
-    icon: Users,
-    title: "Community First",
-    description:
-      "Building connections and serving our community with warmth and care",
-  },
-  {
-    icon: Award,
-    title: "Quality Service",
-    description:
-      "Exceptional hospitality and attention to detail in every interaction",
-  },
-];
-
-const team = [
-  {
-    name: "Chef Arjun Patel",
-    role: "Head Chef",
-    image: "https://images.unsplash.com/photo-1583394293214-28ded15ee548?w=400",
-    description: "15+ years of culinary expertise in authentic Indian cuisine",
-  },
-  {
-    name: "Priya Sharma",
-    role: "Restaurant Manager",
-    image: "https://images.unsplash.com/photo-1580489944761-15a19d654956?w=400",
-    description: "Passionate about creating memorable dining experiences",
-  },
-  {
-    name: "Vikram Singh",
-    role: "Sous Chef",
-    image: "https://images.unsplash.com/photo-1566492031773-4f4e44671857?w=400",
-    description: "Specializes in traditional North Indian flavors",
-  },
-];
-
-const milestones = [
-  { year: "2010", event: "Restaurant Founded" },
-  { year: "2015", event: "Expanded to Second Location" },
-  { year: "2018", event: "Won Best Restaurant Award" },
-  { year: "2020", event: "Launched Online Delivery" },
-  { year: "2024", event: "Celebrating 15,000+ Happy Customers" },
-];
+const iconMap = {
+  "Passion for Food": Heart,
+  "Fresh Ingredients": Leaf,
+  "Community First": Users,
+  "Quality Service": Award,
+};
 
 export default function AboutPage() {
   return (
@@ -68,8 +19,7 @@ export default function AboutPage() {
         <div
           className="absolute inset-0 bg-cover bg-center"
           style={{
-            backgroundImage:
-              "url('https://images.unsplash.com/photo-1555939594-58d7cb561ad1?w=1600')",
+            backgroundImage: `url('${aboutData.hero.image}')`,
           }}
         />
         <div className="absolute inset-0 bg-gradient-to-b from-black/60 to-black/40" />
@@ -81,10 +31,10 @@ export default function AboutPage() {
             transition={{ duration: 0.8 }}
           >
             <h1 className="text-5xl md:text-7xl font-bold text-white mb-6">
-              Our Story
+              {aboutData.hero.title}
             </h1>
             <p className="text-xl md:text-2xl text-white/90 max-w-3xl">
-              Where tradition meets innovation, and every meal tells a story
+              {aboutData.hero.subtitle}
             </p>
           </motion.div>
         </div>
@@ -102,7 +52,7 @@ export default function AboutPage() {
               className="text-center mb-12"
             >
               <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-6">
-                A Journey of Flavor & Tradition
+                {aboutData.story.title}
               </h2>
             </motion.div>
 
@@ -113,29 +63,9 @@ export default function AboutPage() {
               transition={{ duration: 0.6, delay: 0.2 }}
               className="space-y-6 text-lg text-gray-700 leading-relaxed"
             >
-              <p>
-                Founded in 2010, our restaurant began with a simple dream: to
-                bring authentic, soul-satisfying food to the heart of Chennai.
-                What started as a small family-owned eatery has blossomed into a
-                beloved culinary destination where locals and visitors alike
-                come to experience the warmth of Indian hospitality.
-              </p>
-
-              <p>
-                Our founder, inspired by generations of family recipes and a
-                passion for culinary arts, set out to create more than just a
-                restaurant – a place where every dish tells a story, every
-                ingredient is chosen with care, and every guest becomes part of
-                our extended family.
-              </p>
-
-              <p>
-                Today, we continue to honor those traditional roots while
-                embracing innovation in our kitchen. From the sizzle of our
-                tandoor to the aromatic spices that fill the air, every element
-                of our restaurant is designed to transport you to a world of
-                authentic flavors and memorable experiences.
-              </p>
+              {aboutData.story.paragraphs.map((paragraph, index) => (
+                <p key={index}>{paragraph}</p>
+              ))}
             </motion.div>
           </div>
         </div>
@@ -168,19 +98,18 @@ export default function AboutPage() {
             className="max-w-4xl mx-auto mb-16 bg-gradient-to-r from-orange-600 to-orange-500 rounded-3xl p-8 md:p-12 text-center shadow-xl"
           >
             <Target className="w-16 h-16 text-white mx-auto mb-6" />
-            <h3 className="text-3xl font-bold text-white mb-4">Our Mission</h3>
+            <h3 className="text-3xl font-bold text-white mb-4">
+              {aboutData.mission.title}
+            </h3>
             <p className="text-xl text-white/90 leading-relaxed">
-              To create exceptional dining experiences that bring joy and
-              satisfaction to every guest through authentic flavors, outstanding
-              service, and a warm, inviting atmosphere that makes every visit
-              memorable.
+              {aboutData.mission.text}
             </p>
           </motion.div>
 
           {/* Values Grid */}
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-            {values.map((value, index) => {
-              const Icon = value.icon;
+            {aboutData.values.map((value, index) => {
+              const Icon = iconMap[value.title as keyof typeof iconMap];
               return (
                 <motion.div
                   key={index}
@@ -225,7 +154,7 @@ export default function AboutPage() {
           </motion.div>
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-5xl mx-auto">
-            {team.map((member, index) => (
+            {aboutData.team.map((member, index) => (
               <motion.div
                 key={index}
                 initial={{ opacity: 0, scale: 0.9 }}
@@ -274,7 +203,7 @@ export default function AboutPage() {
           </motion.div>
 
           <div className="max-w-4xl mx-auto">
-            {milestones.map((milestone, index) => (
+            {aboutData.milestones.map((milestone, index) => (
               <motion.div
                 key={index}
                 initial={{ opacity: 0, x: -50 }}

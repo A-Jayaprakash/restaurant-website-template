@@ -4,41 +4,30 @@ import { motion } from "framer-motion";
 import { useInView } from "framer-motion";
 import { useRef } from "react";
 import { Award, Clock, Leaf, Users } from "lucide-react";
+import { featuresData } from "@/src/config/features-data";
 
-const features = [
-  {
+const iconMap = {
+  "Award-Winning Cuisine": {
     icon: Award,
-    title: "Award-Winning Cuisine",
-    description:
-      "Recognized for culinary excellence and authentic flavors that keep guests coming back",
     color: "text-orange-600",
     bgColor: "bg-orange-100",
   },
-  {
+  "Quick Service": {
     icon: Clock,
-    title: "Quick Service",
-    description:
-      "Fast, efficient service without compromising on quality or dining experience",
     color: "text-green-600",
     bgColor: "bg-green-100",
   },
-  {
+  "Fresh Ingredients": {
     icon: Leaf,
-    title: "Fresh Ingredients",
-    description:
-      "Farm-to-table approach with locally sourced, organic ingredients daily",
     color: "text-emerald-600",
     bgColor: "bg-emerald-100",
   },
-  {
+  "Family Friendly": {
     icon: Users,
-    title: "Family Friendly",
-    description:
-      "Warm, welcoming atmosphere perfect for family gatherings and celebrations",
     color: "text-blue-600",
     bgColor: "bg-blue-100",
   },
-];
+};
 
 export default function Features() {
   const ref = useRef(null);
@@ -64,8 +53,9 @@ export default function Features() {
 
         {/* Features Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-          {features.map((feature, index) => {
-            const Icon = feature.icon;
+          {featuresData.map((feature, index) => {
+            const iconInfo = iconMap[feature.title as keyof typeof iconMap];
+            const Icon = iconInfo.icon;
 
             return (
               <motion.div
@@ -80,9 +70,9 @@ export default function Features() {
                 <div className="bg-white rounded-2xl p-8 shadow-md hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2 h-full">
                   {/* Icon Container */}
                   <div
-                    className={`${feature.bgColor} w-16 h-16 rounded-xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300`}
+                    className={`${iconInfo.bgColor} w-16 h-16 rounded-xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300`}
                   >
-                    <Icon className={`w-8 h-8 ${feature.color}`} />
+                    <Icon className={`w-8 h-8 ${iconInfo.color}`} />
                   </div>
 
                   {/* Content */}

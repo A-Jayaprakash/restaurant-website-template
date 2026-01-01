@@ -8,26 +8,15 @@ import {
   Facebook,
   Twitter,
 } from "lucide-react";
+import {
+  restaurantData,
+  navigationLinks,
+  quickLinks,
+} from "@/src/config/restaurant-data";
 
 export default function Footer() {
-  const navigationLinks = [
-    { name: "Home", href: "/" },
-    { name: "Menu", href: "/menu" },
-    { name: "Gallery", href: "/gallery" },
-    { name: "About", href: "/about" },
-  ];
-
-  const quickLinks = [
-    { name: "Order Online", href: "#order" },
-    { name: "Table Reservation", href: "#reservation" },
-    { name: "Catering Services", href: "#catering" },
-    { name: "Private Events", href: "#events" },
-  ];
-
-  const openingHours = [
-    { day: "Monday - Friday", hours: "11:00 AM - 10:00 PM" },
-    { day: "Saturday - Sunday", hours: "10:00 AM - 11:00 PM" },
-  ];
+  const weekdayHours = restaurantData.hours.find((h) => h.day === "Monday");
+  const weekendHours = restaurantData.hours.find((h) => h.day === "Saturday");
 
   return (
     <footer className="bg-gray-900 text-gray-300">
@@ -37,42 +26,47 @@ export default function Footer() {
           {/* Restaurant Info */}
           <div>
             <h3 className="text-2xl font-bold text-white mb-4">
-              Restaurant Name
+              {restaurantData.info.name}
             </h3>
             <p className="text-gray-400 mb-6 leading-relaxed">
-              Experience authentic flavors and warm hospitality in the heart of
-              Chennai. Where every meal is a celebration.
+              {restaurantData.info.description}
             </p>
 
             {/* Social Media Links */}
             <div className="flex gap-4">
-              <a
-                href="https://instagram.com"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="w-10 h-10 bg-gray-800 rounded-full flex items-center justify-center hover:bg-orange-600 transition-colors"
-                aria-label="Instagram"
-              >
-                <Instagram className="w-5 h-5" />
-              </a>
-              <a
-                href="https://facebook.com"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="w-10 h-10 bg-gray-800 rounded-full flex items-center justify-center hover:bg-orange-600 transition-colors"
-                aria-label="Facebook"
-              >
-                <Facebook className="w-5 h-5" />
-              </a>
-              <a
-                href="https://twitter.com"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="w-10 h-10 bg-gray-800 rounded-full flex items-center justify-center hover:bg-orange-600 transition-colors"
-                aria-label="Twitter"
-              >
-                <Twitter className="w-5 h-5" />
-              </a>
+              {restaurantData.socialMedia.instagram && (
+                <a
+                  href={restaurantData.socialMedia.instagram}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="w-10 h-10 bg-gray-800 rounded-full flex items-center justify-center hover:bg-orange-600 transition-colors"
+                  aria-label="Instagram"
+                >
+                  <Instagram className="w-5 h-5" />
+                </a>
+              )}
+              {restaurantData.socialMedia.facebook && (
+                <a
+                  href={restaurantData.socialMedia.facebook}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="w-10 h-10 bg-gray-800 rounded-full flex items-center justify-center hover:bg-orange-600 transition-colors"
+                  aria-label="Facebook"
+                >
+                  <Facebook className="w-5 h-5" />
+                </a>
+              )}
+              {restaurantData.socialMedia.twitter && (
+                <a
+                  href={restaurantData.socialMedia.twitter}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="w-10 h-10 bg-gray-800 rounded-full flex items-center justify-center hover:bg-orange-600 transition-colors"
+                  aria-label="Twitter"
+                >
+                  <Twitter className="w-5 h-5" />
+                </a>
+              )}
             </div>
           </div>
 
@@ -122,43 +116,49 @@ export default function Footer() {
             <ul className="space-y-4">
               <li>
                 <a
-                  href="tel:+919876543210"
+                  href={`tel:${restaurantData.contact.phone}`}
                   className="flex items-start gap-3 hover:text-orange-500 transition-colors group"
                 >
                   <Phone className="w-5 h-5 mt-0.5 flex-shrink-0 group-hover:scale-110 transition-transform" />
-                  <span>+91 98765 43210</span>
+                  <span>{restaurantData.contact.phone}</span>
                 </a>
               </li>
               <li>
                 <a
-                  href="mailto:info@restaurant.com"
+                  href={`mailto:${restaurantData.contact.email}`}
                   className="flex items-start gap-3 hover:text-orange-500 transition-colors group"
                 >
                   <Mail className="w-5 h-5 mt-0.5 flex-shrink-0 group-hover:scale-110 transition-transform" />
-                  <span>info@restaurant.com</span>
+                  <span>{restaurantData.contact.email}</span>
                 </a>
               </li>
               <li className="flex items-start gap-3">
                 <MapPin className="w-5 h-5 mt-0.5 flex-shrink-0 text-orange-500" />
                 <span>
-                  123 T. Nagar Main Road,
-                  <br />
-                  Chennai, Tamil Nadu 600017
+                  {restaurantData.contact.address.street},<br />
+                  {restaurantData.contact.address.city},{" "}
+                  {restaurantData.contact.address.state}{" "}
+                  {restaurantData.contact.address.pincode}
                 </span>
               </li>
               <li className="pt-2 border-t border-gray-800">
                 <div className="flex items-start gap-3">
                   <Clock className="w-5 h-5 mt-0.5 flex-shrink-0 text-orange-500" />
                   <div>
-                    {openingHours.map((schedule, index) => (
-                      <div key={index} className="text-sm mb-1">
-                        <span className="text-white font-medium">
-                          {schedule.day}
-                        </span>
-                        <br />
-                        <span className="text-gray-400">{schedule.hours}</span>
-                      </div>
-                    ))}
+                    <div className="text-sm mb-1">
+                      <span className="text-white font-medium">Mon - Fri</span>
+                      <br />
+                      <span className="text-gray-400">
+                        {weekdayHours?.open} - {weekdayHours?.close}
+                      </span>
+                    </div>
+                    <div className="text-sm">
+                      <span className="text-white font-medium">Sat - Sun</span>
+                      <br />
+                      <span className="text-gray-400">
+                        {weekendHours?.open} - {weekendHours?.close}
+                      </span>
+                    </div>
                   </div>
                 </div>
               </li>
@@ -172,7 +172,8 @@ export default function Footer() {
         <div className="container mx-auto px-4 py-6">
           <div className="flex flex-col md:flex-row justify-between items-center gap-4">
             <p className="text-sm text-gray-400">
-              © {new Date().getFullYear()} Restaurant Name. All rights reserved.
+              © {new Date().getFullYear()} {restaurantData.info.name}. All
+              rights reserved.
             </p>
             <div className="flex gap-6 text-sm">
               <a

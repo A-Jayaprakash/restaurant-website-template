@@ -4,65 +4,20 @@ import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { ChevronLeft, ChevronRight, Star, Quote } from "lucide-react";
 import { cn } from "@/src/lib/utils";
-
-// Sample reviews data
-const reviews = [
-  {
-    id: 1,
-    author: "Priya Sharma",
-    rating: 5,
-    date: "2 weeks ago",
-    text: "Absolutely loved the food! The Butter Chicken was divine and the ambience was perfect for a family dinner. The staff was incredibly courteous and attentive. Will definitely visit again!",
-    platform: "Google",
-    avatar: "https://api.dicebear.com/7.x/avataaars/svg?seed=Priya",
-  },
-  {
-    id: 2,
-    author: "Rajesh Kumar",
-    rating: 5,
-    date: "1 month ago",
-    text: "Best biryani in Chennai! The flavors were authentic and portion sizes were generous. The restaurant maintains excellent hygiene standards. Highly recommend for anyone craving quality food.",
-    platform: "Zomato",
-    avatar: "https://api.dicebear.com/7.x/avataaars/svg?seed=Rajesh",
-  },
-  {
-    id: 3,
-    author: "Anjali Menon",
-    rating: 5,
-    date: "3 weeks ago",
-    text: "What a delightful experience! The Paneer Tikka was perfectly grilled and the desserts were heavenly. The outdoor seating area has a lovely vibe. Great place for celebrations!",
-    platform: "Google",
-    avatar: "https://api.dicebear.com/7.x/avataaars/svg?seed=Anjali",
-  },
-  {
-    id: 4,
-    author: "Vikram Reddy",
-    rating: 4,
-    date: "2 months ago",
-    text: "Solid food quality and reasonable prices. The starters were exceptional. Service was quick even during peak hours. Only minor suggestion would be to add more vegetarian options to the menu.",
-    platform: "Swiggy",
-    avatar: "https://api.dicebear.com/7.x/avataaars/svg?seed=Vikram",
-  },
-  {
-    id: 5,
-    author: "Meera Iyer",
-    rating: 5,
-    date: "1 week ago",
-    text: "Hands down the best dining experience in T. Nagar! The staff remembered our preferences from our last visit. Food arrived hot and fresh. The masala chai is a must-try!",
-    platform: "Google",
-    avatar: "https://api.dicebear.com/7.x/avataaars/svg?seed=Meera",
-  },
-];
+import { restaurantData } from "@/src/config/restaurant-data";
 
 export default function Reviews() {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [direction, setDirection] = useState(0);
 
+  const reviews = restaurantData.reviews;
+  const { rating, totalReviews } = restaurantData.info;
+
   // Auto-play carousel
   useEffect(() => {
     const timer = setInterval(() => {
       handleNext();
-    }, 5000); // Change slide every 5 seconds
+    }, 5000);
 
     return () => clearInterval(timer);
   }, [currentIndex]);
@@ -86,7 +41,6 @@ export default function Reviews() {
     setCurrentIndex(index);
   };
 
-  // Animation variants
   const slideVariants = {
     enter: (direction: number) => ({
       x: direction > 0 ? 1000 : -1000,
@@ -103,6 +57,14 @@ export default function Reviews() {
   };
 
   const currentReview = reviews[currentIndex];
+
+  // Generate avatar URL based on author name
+  const getAvatarUrl = (name: string) => {
+    return `https://api.dicebear.com/7.x/avataaars/svg?seed=${name.replace(
+      " ",
+      ""
+    )}`;
+  };
 
   return (
     <section className="py-20 bg-gradient-to-b from-gray-50 to-white overflow-hidden">
@@ -132,7 +94,9 @@ export default function Reviews() {
           className="flex flex-wrap justify-center gap-8 mb-12"
         >
           <div className="text-center">
-            <div className="text-4xl font-bold text-orange-600 mb-1">4.8</div>
+            <div className="text-4xl font-bold text-orange-600 mb-1">
+              {rating}
+            </div>
             <div className="flex items-center justify-center gap-1 mb-1">
               {[...Array(5)].map((_, i) => (
                 <Star
@@ -141,7 +105,7 @@ export default function Reviews() {
                 />
               ))}
             </div>
-            <div className="text-sm text-gray-600">500+ Reviews</div>
+            <div className="text-sm text-gray-600">{totalReviews}+ Reviews</div>
           </div>
           <div className="text-center">
             <div className="text-4xl font-bold text-orange-600 mb-1">2K+</div>
@@ -223,7 +187,7 @@ export default function Reviews() {
                     <div className="flex items-center justify-between flex-wrap gap-4">
                       <div className="flex items-center gap-4">
                         <img
-                          src={currentReview.avatar}
+                          src={getAvatarUrl(currentReview.author)}
                           alt={currentReview.author}
                           className="w-14 h-14 rounded-full border-2 border-orange-100"
                         />
@@ -280,7 +244,7 @@ export default function Reviews() {
             Join thousands of satisfied customers
           </p>
           <a
-            href="tel:+919876543210"
+            href={`tel:${restaurantData.contact.phone}`}
             className="inline-flex items-center gap-2 bg-orange-600 text-white px-8 py-4 rounded-lg font-semibold text-lg hover:bg-orange-700 transform hover:scale-105 transition-all duration-300 shadow-lg"
           >
             Book Your Table Now
