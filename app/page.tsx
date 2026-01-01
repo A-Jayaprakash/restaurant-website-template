@@ -1,8 +1,7 @@
 import Hero from "@/src/components/sections/Hero";
 import Features from "@/src/components/sections/Features";
 import MenuSection from "@/src/components/sections/MenuSection";
-import Reviews from "@/src/components/sections/Reviews";
-import Contact from "@/src/components/sections/Contact";
+import { LazyReviews, LazyContact } from "@/src/components/LazyComponents";
 
 export default function Home() {
   return (
@@ -10,8 +9,8 @@ export default function Home() {
       <Hero />
       <Features />
       <MenuSection />
-      <Reviews />
-      <Contact />
+      <LazyReviews />
+      <LazyContact />
     </main>
   );
 }

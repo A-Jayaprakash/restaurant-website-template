@@ -22,7 +22,7 @@ export default function MenuPage() {
         categoryName: category.name,
       }))
     );
-  }, []);
+  }, [menuCategories]);
 
   // Filter logic
   const filteredCategories = useMemo(() => {

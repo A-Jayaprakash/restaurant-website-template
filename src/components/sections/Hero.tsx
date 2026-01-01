@@ -2,6 +2,7 @@
 
 import { motion } from "framer-motion";
 import { Phone, UtensilsCrossed, MapPin } from "lucide-react";
+import Image from "next/image";
 import { cn } from "@/src/lib/utils";
 import { restaurantData } from "@/src/config/restaurant-data";
 
@@ -11,16 +12,17 @@ export default function Hero() {
 
   return (
     <section className="relative h-screen w-full overflow-hidden">
-      {/* Background Image with Overlay */}
+      {/* Optimized Background Image */}
       <div className="absolute inset-0 z-0">
-        <div
-          className="absolute inset-0 bg-cover bg-center bg-no-repeat"
-          style={{
-            backgroundImage:
-              "url('https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?q=80&w=2070')",
-          }}
+        <Image
+          src="https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?q=80&w=2070"
+          alt="Restaurant ambience"
+          fill
+          priority
+          quality={85}
+          className="object-cover"
+          sizes="100vw"
         />
-        {/* Dark overlay for text readability */}
         <div className="absolute inset-0 bg-black/50" />
       </div>
 
