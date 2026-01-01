@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import "./globals.css";
 import Header from "@/src/components/layout/Header";
+import Footer from "@/src/components/layout/Footer";
 
 export const metadata: Metadata = {
   title: "Restaurant Name",
@@ -17,6 +18,7 @@ export default function RootLayout({
       <body>
         <Header />
         {children}
+        <Footer />
       </body>
     </html>
   );
