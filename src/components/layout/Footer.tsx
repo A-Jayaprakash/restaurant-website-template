@@ -132,15 +132,13 @@ export default function Footer() {
                   <span>{restaurantData.contact.email}</span>
                 </a>
               </li>
-              <li className="flex items-start gap-3">
-                <MapPin className="w-5 h-5 mt-0.5 flex-shrink-0 text-orange-500" />
-                <span>
-                  {restaurantData.contact.address.street},<br />
-                  {restaurantData.contact.address.city},{" "}
-                  {restaurantData.contact.address.state}{" "}
-                  {restaurantData.contact.address.pincode}
-                </span>
-              </li>
+              <a
+                href="#contact"
+                className="flex items-center justify-center gap-2 w-full px-4 py-2 bg-orange-600 text-white rounded-lg hover:bg-orange-700 transition-colors"
+              >
+                <MapPin className="w-4 h-4" />
+                <span className="font-medium">Location</span>
+              </a>
               <li className="pt-2 border-t border-gray-800">
                 <div className="flex items-start gap-3">
                   <Clock className="w-5 h-5 mt-0.5 flex-shrink-0 text-orange-500" />

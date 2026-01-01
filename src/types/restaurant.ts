@@ -10,6 +10,7 @@ export interface RestaurantInfo {
 }
 
 // Contact & location
+// Contact & location
 export interface ContactInfo {
   phone: string;
   whatsapp: string;
@@ -20,8 +21,10 @@ export interface ContactInfo {
     state: string;
     pincode: string;
     googleMapsUrl: string;
+    googleMapsEmbedUrl: string;
   };
 }
+
 
 // Business hours
 export interface Hours {

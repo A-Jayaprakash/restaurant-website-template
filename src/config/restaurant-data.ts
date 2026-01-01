@@ -13,6 +13,8 @@ export const restaurantData: RestaurantData = {
   },
 
   // Contact Information
+  // Contact Information
+  // Contact Information
   contact: {
     phone: "+919876543210",
     whatsapp: "+919876543210",
@@ -22,9 +24,12 @@ export const restaurantData: RestaurantData = {
       city: "Chennai",
       state: "Tamil Nadu",
       pincode: "600017",
-      googleMapsUrl: "https://maps.google.com/?q=T.Nagar,Chennai"
+      googleMapsUrl: "https://www.google.com/maps/place/T.+Nagar,+Chennai,+Tamil+Nadu/@13.0417,80.2341,15z",
+      googleMapsEmbedUrl: "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d62194.89756409733!2d80.19937842167969!3d13.041730590804128!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3a526650e0b6c595%3A0x4f74ddbff946af6b!2sT.%20Nagar%2C%20Chennai%2C%20Tamil%20Nadu!5e0!3m2!1sen!2sin!4v1704137000000!5m2!1sen!2sin"
     }
   },
+
+
 
   // Business Hours
   hours: [

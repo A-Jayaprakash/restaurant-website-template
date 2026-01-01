@@ -99,9 +99,7 @@ export default function Hero() {
 
             {/* Tertiary CTA */}
             <a
-              href={contact.address.googleMapsUrl}
-              target="_blank"
-              rel="noopener noreferrer"
+              href="#contact"
               className={cn(
                 "flex items-center justify-center gap-3 px-8 py-4",
                 "bg-white/10 backdrop-blur-sm text-white rounded-lg font-semibold text-lg",
