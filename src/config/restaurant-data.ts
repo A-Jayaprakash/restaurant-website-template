@@ -3,7 +3,7 @@ import { RestaurantData } from "@/src/types/restaurant";
 export const restaurantData: RestaurantData = {
   // Basic Restaurant Information
   info: {
-    name: "Restaurant Name",
+    name: "The Grand Spice",
     tagline: "Authentic Flavors, Unforgettable Experience",
     description: "Experience culinary excellence where tradition meets innovation. Fresh ingredients, bold flavors, and warm hospitality await you.",
     cuisine: ["Indian", "North Indian", "South Indian", "Biryani"],
