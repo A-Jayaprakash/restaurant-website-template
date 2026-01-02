@@ -77,7 +77,7 @@ export default function MenuSection() {
               whileInView={{ opacity: 1, scale: 1 }}
               viewport={{ once: true }}
               transition={{ duration: 0.5, delay: index * 0.1 }}
-              className="group bg-white rounded-2xl overflow-hidden shadow-md hover:shadow-2xl transition-all duration-300"
+              className="group bg-white rounded-2xl overflow-hidden shadow-md hover:shadow-2xl transition-all duration-300 cursor-pointer"
             >
               {/* Image Container */}
               <div className="relative h-48 overflow-hidden">
@@ -126,19 +126,9 @@ export default function MenuSection() {
                 <h3 className="text-xl font-bold text-gray-900 mb-2 group-hover:text-orange-600 transition-colors">
                   {item.name}
                 </h3>
-                <p className="text-gray-600 text-sm mb-4 line-clamp-2">
+                <p className="text-gray-600 text-sm line-clamp-2 leading-relaxed">
                   {item.description}
                 </p>
-
-                {/* Price and Action */}
-                <div className="flex items-center justify-between">
-                  <span className="text-2xl font-bold text-orange-600">
-                    ₹{item.price}
-                  </span>
-                  <button className="bg-orange-600 text-white px-4 py-2 rounded-lg font-semibold hover:bg-orange-700 transition-colors transform hover:scale-105">
-                    Add +
-                  </button>
-                </div>
               </div>
             </motion.div>
           ))}
